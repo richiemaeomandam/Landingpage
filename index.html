@@ -102,16 +102,17 @@
             <th>Subjects</th>
           </tr>
         </thead>
-        <tbody id="courses-body"></tbody>
+        <tbody id="courses-body">
+          <tr><td colspan="3">No subjects found</td></tr>
+        </tbody>
       </table>
     </div>
   </div>
 
   <script>
-    let allCourses = []; // To store all courses globally
+    let allCourses = [];
 
     document.addEventListener("DOMContentLoaded", function () {
-      // Change jsonURL if using an online URL (GitHub Pages)
       const jsonURL = 'course.json'; 
 
       fetch(jsonURL)
@@ -124,58 +125,43 @@
         .then(data => {
           allCourses = data.courses;
           console.log("Loaded courses:", allCourses);
-          displayCourses(allCourses);
         })
         .catch(error => console.error('Error loading JSON:', error));
+    });
 
-      function displayCourses(courses) {
-        const tableBody = document.getElementById("courses-body");
-        tableBody.innerHTML = "";
-        courses.forEach(course => {
-          course.subjects.forEach(subject => {
-            let row = `<tr>
-                        <td>${course.year}</td>
-                        <td>${course.semester}</td>
-                        <td>${subject}</td>
-                      </tr>`;
-            tableBody.innerHTML += row;
-          });
+    document.getElementById("search").addEventListener("input", function () {
+      const keyword = this.value.toLowerCase().trim();
+      console.log("Searching for:", keyword);
+      let filteredSubjects = [];
+
+      allCourses.forEach(course => {
+        course.subjects.forEach(subject => {
+          if (subject.toLowerCase().includes(keyword)) {
+            filteredSubjects.push({
+              year: course.year,
+              semester: course.semester,
+              subject: subject
+            });
+          }
+        });
+      });
+
+      console.log("Filtered subjects:", filteredSubjects);
+      const tableBody = document.getElementById("courses-body");
+      tableBody.innerHTML = "";
+      
+      if (filteredSubjects.length === 0) {
+        tableBody.innerHTML = `<tr><td colspan="3">No subjects found</td></tr>`;
+      } else {
+        filteredSubjects.forEach(entry => {
+          let row = `<tr>
+                       <td>${entry.year}</td>
+                       <td>${entry.semester}</td>
+                       <td>${entry.subject}</td>
+                     </tr>`;
+          tableBody.innerHTML += row;
         });
       }
-
-      document.getElementById("search").addEventListener("input", function () {
-        const keyword = this.value.toLowerCase().trim();
-        console.log("Searching for:", keyword);
-        let filteredSubjects = [];
-
-        allCourses.forEach(course => {
-          course.subjects.forEach(subject => {
-            if (subject.toLowerCase().includes(keyword)) {
-              filteredSubjects.push({
-                year: course.year,
-                semester: course.semester,
-                subject: subject
-              });
-            }
-          });
-        });
-        console.log("Filtered subjects:", filteredSubjects);
-
-        const tableBody = document.getElementById("courses-body");
-        tableBody.innerHTML = "";
-        if (filteredSubjects.length === 0) {
-          tableBody.innerHTML = `<tr><td colspan="3">No subjects found</td></tr>`;
-        } else {
-          filteredSubjects.forEach(entry => {
-            let row = `<tr>
-                         <td>${entry.year}</td>
-                         <td>${entry.semester}</td>
-                         <td>${entry.subject}</td>
-                       </tr>`;
-            tableBody.innerHTML += row;
-          });
-        }
-      });
     });
   </script>
 </body>
