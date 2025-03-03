@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Subjects</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8ebe9;
+            text-align: center;
+        }
+        .container {
+            width: 60%;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        input {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4a261;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Subjects Taken</h1>
+        <input type="text" id="search" placeholder="Search subjects...">
+        <table>
+            <thead>
+                <tr>
+                    <th>Year</th>
+                    <th>Semester</th>
+                    <th>Subjects</th>
+                </tr>
+            </thead>
+            <tbody id="courses-body">
+                <tr><td colspan="3">Loading subjects...</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        let allCourses = []; // Store all courses globally
+
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch('course.json')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Failed to fetch JSON");
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    allCourses = data.courses;
+                    displayCourses(allCourses);
+                })
+                .catch(error => console.error("Error loading JSON:", error));
+
+            function displayCourses(courses) {
+                let tableBody = document.getElementById("courses-body");
+                tableBody.innerHTML = "";
+                courses.forEach(course => {
+                    course.subjects.forEach(subject => {
+                        let row = `<tr>
+                            <td>${course.year}</td>
+                            <td>${course.semester}</td>
+                            <td>${subject}</td>
+                        </tr>`;
+                        tableBody.innerHTML += row;
+                    });
+                });
+            }
+
+            document.getElementById("search").addEventListener("input", function() {
+                let keyword = this.value.toLowerCase();
+                let filteredSubjects = [];
+
+                allCourses.forEach(course => {
+                    course.subjects.forEach(subject => {
+                        if (subject.toLowerCase().includes(keyword)) {
+                            filteredSubjects.push({
+                                year: course.year,
+                                semester: course.semester,
+                                subject: subject
+                            });
+                        }
+                    });
+                });
+
+                let tableBody = document.getElementById("courses-body");
+                tableBody.innerHTML = "";
+
+                if (filteredSubjects.length === 0) {
+                    tableBody.innerHTML = `<tr><td colspan="3">No subjects found</td></tr>`;
+                } else {
+                    filteredSubjects.forEach(course => {
+                        let row = `<tr>
+                            <td>${course.year}</td>
+                            <td>${course.semester}</td>
+                            <td>${course.subject}</td>
+                        </tr>`;
+                        tableBody.innerHTML += row;
+                    });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
