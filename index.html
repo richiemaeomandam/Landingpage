@@ -1,101 +1,192 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Richie Mae Omandam | Portfolio</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400&display=swap');
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Richie Mae Omandam | Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400&display=swap');
 
-    body {
-      font-family: 'Poppins', sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f8ebe9;
-      color: #333;
-    }
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f8ebe9;
+            color: #333;
+        }
 
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 40px;
-      background: #d4e2d4;
-      color: #333;
-    }
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 40px;
+            background: #d4e2d4;
+            color: #333;
+        }
 
-    h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 3em;
-      color: #222;
-    }
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3em;
+            color: #222;
+        }
 
-    .profile-pic {
-      width: 200px;
-      height: 200px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 4px solid white;
-    }
+        .profile-pic {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid white;
+        }
 
-    .home-button {
-      padding: 10px 20px;
-      background-color: #f4a261;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 1em;
-      text-decoration: none;
-    }
+        .container {
+            width: 80%;
+            margin: auto;
+            text-align: center;
+            padding: 50px 0;
+        }
 
-    .home-button:hover {
-      background-color: #e76f51;
-    }
+        .card {
+            background: white;
+            padding: 30px;
+            margin: 20px auto;
+            width: 80%;
+            max-width: 800px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
 
-    .container {
-      width: 80%;
-      margin: auto;
-      text-align: center;
-      padding: 50px 0;
-    }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
 
-    .card {
-      background: white;
-      padding: 30px;
-      margin: 20px auto;
-      width: 80%;
-      max-width: 800px;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
-  </style>
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f4a261;
+            color: white;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>Richie Mae Omandam</h1>
-    <a href="dashboard.html" class="home-button">Home</a>
-    <img src="profile.jpg" alt="Richie Mae Omandam" class="profile-pic" />
-  </header>
+    <header>
+        <div class="header-text">
+            <h1>Richie Mae Omandam</h1>
+            <p>Information Technology Student | Graphic Designer | Researcher</p>
+        </div>
+        <img src="profile.jpg" alt="Richie Mae Omandam" class="profile-pic">
+    </header>
 
-  <div class="container">
-    <div class="card">
-      <h2>Subjects Taken</h2>
-      <input type="text" id="search" placeholder="Search subjects..." />
-      <table id="courses-table">
-        <thead>
-          <tr>
-            <th>Year</th>
-            <th>Semester</th>
-            <th>Subjects</th>
-          </tr>
-        </thead>
-        <tbody id="courses-body">
-          <tr><td colspan="3">No subjects found</td></tr>
-        </tbody>
-      </table>
+    <div class="container">
+        <div class="card">
+            <h2>About Me</h2>
+            <p>Hi! I'm Richie, a passionate IT student with experience in graphic design, research, and system development.</p>
+        </div>
+
+        <div class="card">
+            <h2>Subjects Taken</h2>
+            <input type="text" id="search" placeholder="Search subjects...">
+            <table id="courses-table">
+                <thead>
+                    <tr>
+                        <th>Year</th>
+                        <th>Semester</th>
+                        <th>Subjects</th>
+                    </tr>
+                </thead>
+                <tbody id="courses-body"></tbody>
+            </table>
+        </div>
+
+        <div class="card">
+            <h2>Contact</h2>
+            <p>Email: your-email@example.com</p>
+            <a href="#" class="btn">Get in Touch</a>
+        </div>
     </div>
-  </div>
+
+    <script>
+        let allCourses = [];  // Stores all courses for searching
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const jsonURL = 'course.json';  // Change this if using GitHub Pages
+
+            fetch(jsonURL)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Error fetching JSON');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    allCourses = data.courses; // Save data for searching
+                    displayCourses(allCourses);
+                })
+                .catch(error => console.error('Error loading JSON:', error));
+
+            function displayCourses(courses) {
+                let tableBody = document.getElementById("courses-body");
+                tableBody.innerHTML = "";
+                courses.forEach(course => {
+                    course.subjects.forEach(subject => {
+                        let row = `<tr>
+                            <td>${course.year}</td>
+                            <td>${course.semester}</td>
+                            <td>${subject}</td>
+                        </tr>`;
+                        tableBody.innerHTML += row;
+                    });
+                });
+            }
+
+            document.getElementById("search").addEventListener("input", function() {
+                let keyword = this.value.toLowerCase();
+                let filteredSubjects = [];
+
+                // Filter subjects based on keyword
+                allCourses.forEach(course => {
+                    course.subjects.forEach(subject => {
+                        if (subject.toLowerCase().includes(keyword)) {
+                            filteredSubjects.push({
+                                year: course.year,
+                                semester: course.semester,
+                                subject: subject
+                            });
+                        }
+                    });
+                });
+
+                // Display filtered subjects
+                let tableBody = document.getElementById("courses-body");
+                tableBody.innerHTML = "";
+                if (filteredSubjects.length === 0) {
+                    tableBody.innerHTML = `<tr><td colspan="3">No subjects found</td></tr>`;
+                } else {
+                    filteredSubjects.forEach(course => {
+                        let row = `<tr>
+                            <td>${course.year}</td>
+                            <td>${course.semester}</td>
+                            <td>${course.subject}</td>
+                        </tr>`;
+                        tableBody.innerHTML += row;
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
